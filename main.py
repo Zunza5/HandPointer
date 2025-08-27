@@ -84,36 +84,42 @@ def calculate_velocity(fingermarkers):
     return int(dx_filt), int(dy_filt), int(dt/1000)
 
 
+def main():
+    thread = threading.Thread(target=webcam.init_mediapipe)
+    thread.start()
+    fingermarkers = []
+    clickmarker = []
+    img_counter = 0
+    clickable = True
+    screenWidth, screenHeight = pyautogui.size()
 
-thread = threading.Thread(target=webcam.init_mediapipe)
-thread.start()
-fingermarkers = []
-clickmarker = []
-img_counter = 0
-clickable = True
-screenWidth, screenHeight = pyautogui.size()
+    while True:
+        if collect_marker_data(fingermarkers, clickmarker):
+            if len(fingermarkers) >= 2:
+                x, y = pyautogui.position()
+                dx, dy, dt = calculate_velocity(fingermarkers)
+                if(x + dx > 0 and x + dx < screenWidth and y + dy > 0 and y + dy < screenHeight):
+                    pyautogui.moveTo(x + dx, y + dy, dt)
+                # Mantieni solo gli ultimi 2 marker
+                fingermarkers = fingermarkers[-2:]
+
+                dist = norm(np.array([clickmarker[-1].x, clickmarker[-1].y]) - np.array([clickmarker[-2].x, clickmarker[-2].y]))
+                print(f"Distance between thumb and middle finger: {dist}")
+                if dist < 0.04 and clickable:
+                    # Esegui il click
+                    pyautogui.click()
+                    clickable = False
+                else:
+                    clickable = True
+        else:
+            fingermarkers.clear()
+            clickmarker.clear()
 
 
-while True:
-    if collect_marker_data(fingermarkers, clickmarker):
-        if len(fingermarkers) >= 2:
-            x, y = pyautogui.position()
-            dx, dy, dt = calculate_velocity(fingermarkers)
-            if(x + dx > 0 and x + dx < screenWidth and y + dy > 0 and y + dy < screenHeight):
-                pyautogui.moveTo(x + dx, y + dy, dt)
-            # Mantieni solo gli ultimi 2 marker
-            fingermarkers = fingermarkers[-2:]
 
-            dist = norm(np.array([clickmarker[-1].x, clickmarker[-1].y]) - np.array([clickmarker[-2].x, clickmarker[-2].y]))
-            print(f"Distance between thumb and middle finger: {dist}")
-            if dist < 0.04 and clickable:
-                # Esegui il click
-                pyautogui.click()
-                clickable = False
-            else:
-                clickable = True
-    else:
-        fingermarkers.clear()
-        clickmarker.clear()
+if __name__ == "__main__":
+    main()
+
+
 
 

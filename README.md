@@ -16,10 +16,11 @@ What it showcases
 
 ## Run Locally
 
-1: Clone the git repo
+1: Clone the git repo and go to directory
 
 ```bash
   git clone https://github.com/Zunza5/HandPointer.git
+  cd HandPointer
 ```
 
 2: Create and activate a virtual environment

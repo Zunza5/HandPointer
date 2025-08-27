@@ -1,15 +1,13 @@
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-import cv2 as cv
+import cv2 as cv 
 from utilies import draw_landmarks_on_image
 import time
 import globals
 
 
 model_path = 'model/hand_landmarker.task'
-
-import mediapipe as mp
 
 def init_mediapipe():
     BaseOptions = mp.tasks.BaseOptions

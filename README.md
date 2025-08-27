@@ -13,6 +13,11 @@ What it showcases
 -	Systems thinking: translating continuous hand pose data into stable, user-friendly controls through filtering, debouncing, and gesture state machines .
 - Accessibility and HCI: enabling touch-free control for mobility and hygiene contexts, and prototyping alternative input methods .
 
+## Gesture set
+
+
+- Hand open: move the pointer by tracking the index fingertip position in real time, with smoothing to ensure stable motion.
+- Index + middle finger touch: perform a left-click when the index fingertip contacts the middle fingertip, with a short debounce to prevent accidental multiple clicks.
 
 ## Run Locally
 

@@ -16,6 +16,8 @@ What it showcases
 
 ## Run Locally
 
+you will need python 3.12 to use
+
 1: Clone the git repo and go to directory
 
 ```bash
@@ -28,13 +30,13 @@ What it showcases
 macOS/Linux:
 
 ```bash
-  python3 -m venv .venv
+  python3.12 -m venv .venv
   source .venv/bin/activate
 ```
 windows:
 
 ```bash
-  python -m venv .venv
+  python3.12 -m venv .venv
   ..venv\Scripts\Activate.ps1
 ```
 
@@ -47,7 +49,7 @@ windows:
 4: run main.py
 
 ```bash
-  python3 main.py
+  python3.12 main.py
 ```
 ## Authors
 

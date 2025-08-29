@@ -112,7 +112,7 @@ def main():
                     # Esegui il click
                     pyautogui.click()
                     clickable = False
-                else:
+                elif dist3d >= 0.04:
                     clickable = True
         else:
             fingermarkers.clear()

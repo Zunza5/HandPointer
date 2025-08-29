@@ -103,9 +103,12 @@ def main():
                 # Mantieni solo gli ultimi 2 marker
                 fingermarkers = fingermarkers[-2:]
 
-                dist = norm(np.array([clickmarker[-1].x, clickmarker[-1].y]) - np.array([clickmarker[-2].x, clickmarker[-2].y]))
-                print(f"Distance between thumb and middle finger: {dist}")
-                if dist < 0.04 and clickable:
+                # Distanza euclidea 3D tra pollice e medio
+                p1 = clickmarker[-1]
+                p2 = clickmarker[-2]
+                dist3d = math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2 + (p1.z - p2.z)**2)
+                print(f"3D distance between thumb and middle finger: {dist3d}")
+                if dist3d < 0.04 and clickable:
                     # Esegui il click
                     pyautogui.click()
                     clickable = False
